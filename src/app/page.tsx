@@ -9,7 +9,6 @@ async function Images() {
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUZAO3rz-GxjZ0oGY3uK_3YFK60Fz4bc7h3w&s",
     "https://dxk6aub3z0.ufs.sh/f/u4TIStYoNWJ0WQEtzm8uKjvAE49OfoeClq5PTnRDhyazFk82",
     "https://dxk6aub3z0.ufs.sh/f/u4TIStYoNWJ0YECEGJZVlLFxZNWJSh2IOpt4UAfRDvwYemd3"
-  
   ];
     
   const images = mockUrls.map((url, index) => ({
@@ -18,42 +17,58 @@ async function Images() {
   }));
 
   return (
-    <div>
-      <div className="flex justify-end p4">
+    <div className="max-w-7xl mx-auto p-4">
+      <div className="flex justify-end mb-4">
         <UploadDialog />
       </div>
-    <div className="flex flex-wrap justify-center gap-6 p-4">
-      {images.map((image) => (
-      <div key={image.id} className="flex w-64 flex-col">
-        <div className="relative w-full h-40 bg-zinc-900 overflow-hidden">
-          <img 
-            src={image.url} 
-            alt={`Image ${image.id}`} 
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="text-center mt-2">{image.id}</div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {images.map((image) => (
+          <div 
+            key={image.id} 
+            className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform hover:scale-105"
+          >
+            <div className="relative w-full h-40 bg-zinc-900">
+              <img 
+                src={image.url} 
+                alt={`Image ${image.id}`} 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="text-center text-sm font-medium py-2 bg-gray-50">
+              Image {image.id}
+            </div>
+          </div>
+        ))}
       </div>
-  ))}
-</div>
-</div>
-   );
+    </div>
+  );
 }
 
 export default function HomePage() {
   return (
-    <main className="">
-      <SignedOut>
-       <div className="h-full w-full text-center text-2xl">
-          Please Sign In Above to Continue!
-       </div>
-      </SignedOut>
-      <SignedIn>
-         <div className="h-full w-full text-center text-2xl">
+    <main className="min-h-screen bg-gray-100">
+      <header className="w-full bg-white shadow p-4 flex justify-between items-center">
+        <h1 className="text-xl font-semibold text-gray-800">Image Gallery</h1>
+        <SignedIn>
+          <Link href="#" className="text-blue-600 hover:underline text-sm">Logout</Link>
+        </SignedIn>
+      </header>
+      <section className="py-10">
+        <SignedOut>
+          <div className="h-full w-full text-center text-2xl text-gray-700">
+            Please Sign In Above to Continue!
+          </div>
+        </SignedOut>
+        <SignedIn>
+          <div className="h-full w-full text-center text-2xl text-gray-700 mb-8">
             Welcome Back!
-            <Images />
-       </div>
-      </SignedIn>
+          </div>
+          <Images />
+        </SignedIn>
+      </section>
+      <footer className="mt-10 text-center text-sm text-gray-500 py-4">
+        © 2025 Image Gallery App. All rights reserved.
+      </footer>
     </main>
   );
 }
