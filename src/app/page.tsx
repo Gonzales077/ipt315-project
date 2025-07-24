@@ -48,9 +48,9 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-gray-100">
       <header className="w-full bg-white shadow p-4 flex justify-between items-center">
-        <h1 className="text-xl font-semibold text-gray-800">Image Gallery</h1>
+        <h1 className="text-xl font-semibold text-gray-800">Upload Gallery</h1>
         <SignedIn>
-          <Link href="#" className="text-blue-600 hover:underline text-sm">Logout</Link>
+          <Link href="#" className="text-blue-600 hover:underline text-sm"></Link>
         </SignedIn>
       </header>
       <section className="py-10">
@@ -66,9 +66,6 @@ export default function HomePage() {
           <Images />
         </SignedIn>
       </section>
-      <footer className="mt-10 text-center text-sm text-gray-500 py-4">
-        © 2025 Image Gallery App. All rights reserved.
-      </footer>
     </main>
   );
 }
