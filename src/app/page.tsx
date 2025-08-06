@@ -2,19 +2,24 @@ import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
 import { UploadButton } from "~/utils/uploadthing";
 import { UploadDialog } from "./_components/upload-dialog";
+import { getMyImages } from "~/server/db/queries";
+
+export const dynamic = "force-dynamic";
 
 async function Images() {
-  const mockUrls = [
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjRy1EqJWCWEgrX793dRmSRhOOC3lbmFO8Mg&s", 
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUZAO3rz-GxjZ0oGY3uK_3YFK60Fz4bc7h3w&s",
-    "https://dxk6aub3z0.ufs.sh/f/u4TIStYoNWJ0WQEtzm8uKjvAE49OfoeClq5PTnRDhyazFk82",
-    "https://dxk6aub3z0.ufs.sh/f/u4TIStYoNWJ0YECEGJZVlLFxZNWJSh2IOpt4UAfRDvwYemd3"
-  ];
+  // const mockUrls = [
+  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjRy1EqJWCWEgrX793dRmSRhOOC3lbmFO8Mg&s", 
+  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUZAO3rz-GxjZ0oGY3uK_3YFK60Fz4bc7h3w&s",
+  //   "https://dxk6aub3z0.ufs.sh/f/u4TIStYoNWJ0WQEtzm8uKjvAE49OfoeClq5PTnRDhyazFk82",
+  //   "https://dxk6aub3z0.ufs.sh/f/u4TIStYoNWJ0YECEGJZVlLFxZNWJSh2IOpt4UAfRDvwYemd3"
+  // ];
     
-  const images = mockUrls.map((url, index) => ({
-    id: index + 1,
-    url,
-  }));
+  // const images = mockUrls.map((url, index) => ({
+  //   id: index + 1,
+  //   url,
+  // }));
+
+  const images = await getMyImages()
 
   return (
     <div className="max-w-7xl mx-auto p-4">
@@ -29,7 +34,7 @@ async function Images() {
           >
             <div className="relative w-full h-40 bg-zinc-900">
               <img 
-                src={image.url} 
+                src={image.imageUrl} 
                 alt={`Image ${image.id}`} 
                 className="w-full h-full object-cover"
               />
@@ -44,7 +49,7 @@ async function Images() {
   );
 }
 
-export default function HomePage() {
+export default async function HomePage() {
   return (
     <main className="min-h-screen bg-gray-100">
       <header className="w-full bg-white shadow p-4 flex justify-between items-center">
