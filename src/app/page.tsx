@@ -1,3 +1,5 @@
+
+
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
 import { UploadButton } from "~/utils/uploadthing";
@@ -13,20 +15,26 @@ async function Images() {
 
   return (
     <div className="max-w-7xl mx-auto p-4">
-      {/* Upload button aligned to right */}
+      {/* Upload Button */}
       <div className="flex justify-end mb-4">
         <UploadDialog />
       </div>
 
-      {/* Carousel for images */}
-      <Carousel className="w-full">
-        <CarouselContent>
+      {/* Vertical Carousel */}
+      <Carousel
+        opts={{
+          align: "start",
+        }}
+        orientation="vertical"
+        className="w-full max-w-lg mx-auto" // widened carousel
+      >
+        <CarouselContent className="-mt-1 h-[600px]"> {/* taller container */}
           {images.map((image) => (
-            <CarouselItem key={image.id} className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+            <CarouselItem key={image.id} className="pt-1">
               <div className="p-1">
                 <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform hover:scale-105">
                   <ImageModal image={image}>
-                    <div className="relative w-full h-40 bg-zinc-900">
+                    <div className="relative w-full h-[550px] bg-zinc-900"> {/* taller image */}
                       <img
                         src={image.imageUrl}
                         alt={`Image ${image.id}`}
@@ -48,6 +56,7 @@ async function Images() {
     </div>
   );
 }
+
 
 export default async function HomePage() {
   return (
