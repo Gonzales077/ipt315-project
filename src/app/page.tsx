@@ -3,6 +3,7 @@ import Link from "next/link";
 import { UploadButton } from "~/utils/uploadthing";
 import { UploadDialog } from "./_components/upload-dialog";
 import { getMyImages } from "~/server/db/queries";
+import { ImageModal } from "./_components/image-modal";
 
 export const dynamic = "force-dynamic";
 
@@ -30,8 +31,8 @@ async function Images() {
         {images.map((image) => (
           <div 
             key={image.id} 
-            className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform hover:scale-105"
-          >
+            className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform hover:scale-105">
+            <ImageModal image={image}>
             <div className="relative w-full h-40 bg-zinc-900">
               <img 
                 src={image.imageUrl} 
@@ -39,8 +40,9 @@ async function Images() {
                 className="w-full h-full object-cover"
               />
             </div>
+            </ImageModal>
             <div className="text-center text-sm font-medium py-2 bg-gray-50">
-              Image {image.id}
+              {image.imageName || image.filename}
             </div>
           </div>
         ))}
