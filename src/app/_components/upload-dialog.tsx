@@ -64,7 +64,7 @@ export function UploadDialog(){
         <span className="test-lg">Uploading...</span>
         </div>,
         {
-          duration: 100000,
+          duration: 1000,
           id: "upload-beign",
         }
       );
@@ -125,46 +125,46 @@ export function UploadDialog(){
       // />
     <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline">Upload Image</Button>
+          <Button className="bg-zinc-900 text-white hover:bg-zinc-800">Upload Image</Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Upload Image</DialogTitle>
-            <DialogDescription>
-              Select an image to upload. Click save when you're done.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="flex flex-col gap-2">
-            {selectedImageurl !== null && (
-              <div>
-                <img 
-                src={selectedImageurl}
-                alt={selectedImageName || "Selected Image"} 
-                className="w=full rounded-md object-cover"
-                />
-              </div>
-            )}
+       <DialogContent className="sm:max-w-[425px] p-0">
+  <div className="w-full h-full bg-black dark:bg-zinc-900 dark:text-white p-6 rounded-md">
+    <DialogHeader>
+      <DialogTitle>Upload Image</DialogTitle>
+      <DialogDescription>
+        Select an image to upload. Click save when you're done.
+      </DialogDescription>
+    </DialogHeader>
+    <div className="flex flex-col gap-2 mt-4">
+      {selectedImageurl !== null && (
+        <div>
+          <img 
+            src={selectedImageurl}
+            alt={selectedImageName || "Selected Image"} 
+            className="w-full rounded-md object-cover"
+          />
+        </div>
+      )}
 
-            <div className="flex items-center gap-2"> 
-              <Button variant={"outline"} 
-              onClick={() => inputRef.current?.click()}
-              >
-                <Upload />
-              </Button>
-              <input 
-              type="file" 
-              ref={inputRef} 
-              className="sr-only" 
-              accept="image"
-              onChange={handleImageSelect}
-              />
-              {setSelectedImageName !== null && (
-                <div>Selected Image: {selectedImageName}</div>
-              )}
-            </div>
-          </div>
-          <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <div className="flex items-center gap-2"> 
+        <Button className="bg-zinc-900 text-white hover:bg-zinc-800" onClick={() => inputRef.current?.click()}>
+          <Upload />
+        </Button>
+        <input 
+          type="file" 
+          ref={inputRef} 
+          className="sr-only" 
+          accept="image"
+          onChange={handleImageSelect}
+        />
+        {setSelectedImageName !== null && (
+          <div>Selected Image: {selectedImageName}</div>
+        )}
+      </div>
+    </div>
+
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-4">
         <FormField
           control={form.control}
           name="imageName"
@@ -181,15 +181,17 @@ export function UploadDialog(){
             </FormItem>
           )}
         />
-         <DialogFooter>
-            <Button type="submit" disabled={isUploading}>
-              Submit
-              </Button>
-          </DialogFooter>
+        <DialogFooter>
+          <Button type="submit" disabled={isUploading}>
+            Submit
+          </Button>
+        </DialogFooter>
       </form>
     </Form>
-         
-        </DialogContent>
+  </div>
+</DialogContent>
+
+
     </Dialog>
     );
 }

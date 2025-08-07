@@ -53,50 +53,53 @@ export function ImageModal({ image, children }: ImageModalProps) {
       </div>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-6xl p-0 overflow-hidden">
-          <div className="flex flex-col md:flex-row h-full">
+       <DialogContent className="max-w-6xl p-0 overflow-hidden rounded-lg shadow-lg">
+  <div className="flex flex-col md:flex-row h-full">
 
-            {/* Left - Image / Code Editor Look */}
-            <div className="bg-[#1e1e1e] text-white p-4 rounded-md w-full md:w-[65%]">
-              <img
-                src={image.imageUrl}
-                alt={image.imageName || "Image"}
-                className="w-full h-auto rounded"
-              />
-            </div>
+    {/* Left Panel - Image */}
+    <div className="bg-[#1e1e1e] p-4 w-full md:w-[65%] flex items-center justify-center">
+      <img
+        src={image.imageUrl}
+        alt={image.imageName || "Image"}
+        className="w-full max-h-[75vh] object-contain rounded-md border border-zinc-700"
+      />
+    </div>
 
-            {/* Right - Description Panel */}
-            <div className="bg-white dark:bg-gray-900 text-black dark:text-white p-6 w-full md:w-[35%]">
-              <DialogHeader className="border-b p-4">
-                <DialogTitle className="text-center">
-                    {image.imageName || image.filename } 
-                </DialogTitle>
-              </DialogHeader>
-              
-              <div className="flex flex-1 flex-col space-y-4 p-4">
-                <div className="flex flex-col">
-                    <span className="text-sm font-medium text-gray-100">
-                        Uploaded By:
-                    </span>
-                    <span>{isLoading ? "Loading... " : uploaderInfo?.fullName}</span>   
-                </div>   
+    {/* Right Panel - Metadata */}
+    <div className="bg-white dark:bg-zinc-900 text-black dark:text-white w-full md:w-[35%] flex flex-col justify-between border-l border-zinc-200 dark:border-zinc-800">
+      <DialogHeader className="p-6 border-b border-zinc-200 dark:border-zinc-800">
+        <DialogTitle className="text-xl font-semibold text-center">
+          {image.imageName || image.filename}
+        </DialogTitle>
+      </DialogHeader>
 
-                <div className="flex flex-col">
-                    <span className="text-sm font-medium text-gray-100">
-                        Created At:
-                    </span>
-                    <span>
-                        {new Date(image.createdAt).toLocaleDateString()}
-                    </span>   
-                </div>  
+      <div className="flex-1 px-6 py-4 space-y-6">
+        <div className="flex flex-col">
+          <span className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">
+            Uploaded By
+          </span>
+          <span className="text-base font-medium">
+            {isLoading ? "Loading..." : uploaderInfo?.fullName}
+          </span>
+        </div>
 
-                <div className="">
-                    <DeleteButton idAsNumber={image.id} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </DialogContent>
+        <div className="flex flex-col">
+          <span className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">
+            Created At
+          </span>
+          <span className="text-base font-medium">
+            {new Date(image.createdAt).toLocaleDateString()}
+          </span>
+        </div>
+      </div>
+
+      <div className="px-6 pb-6">
+        <DeleteButton idAsNumber={image.id} />
+      </div>
+    </div>
+  </div>
+</DialogContent>
+
       </Dialog>
     </div>
   );
