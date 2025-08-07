@@ -4,6 +4,7 @@ import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "~/components/ui/dialog";
+import { DeleteButton } from "./delete-button";
 
 interface ImageModalProps {
   image: {
@@ -90,7 +91,7 @@ export function ImageModal({ image, children }: ImageModalProps) {
                 </div>  
 
                 <div className="">
-                    <Button>Delete</Button>
+                    <DeleteButton idAsNumber={image.id} />
                 </div>
               </div>
             </div>
